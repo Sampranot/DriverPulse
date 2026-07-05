@@ -1,38 +1,42 @@
 {
   "version": "1.1.0",
-  "updated": "2026-07-05T15:56:38.500700",
+  "updated": "2026-07-05T20:07:01.816136",
   "source": "curated",
   "total_entries": 45,
   "drivers": {
     "PCI\\VEN_10DE": {
       "name": "NVIDIA GPU",
       "manufacturer": "NVIDIA",
-      "latest_version": "560.94",
+      "latest_version": "965.55",
       "download_url": "https://us.download.nvidia.com/Windows/560.94/560.94-desktop-win10-win11-64bit-international-dch-whql.exe",
       "category": "display",
       "checksum": "",
-      "notes": "Studio Driver - Dec 2025"
+      "notes": "Studio Driver - Dec 2025",
+      "_auto_updated": "2026-07-05T20:07:01.816121"
     },
     "PCI\\VEN_10DE&DEV_1E84": {
       "name": "NVIDIA GeForce RTX 2080 Ti",
       "manufacturer": "NVIDIA",
-      "latest_version": "560.94",
+      "latest_version": "965.55",
       "download_url": "https://us.download.nvidia.com/Windows/560.94/560.94-desktop-win10-win11-64bit-international-dch-whql.exe",
-      "category": "display"
+      "category": "display",
+      "_auto_updated": "2026-07-05T20:07:01.816127"
     },
     "PCI\\VEN_10DE&DEV_1F08": {
       "name": "NVIDIA GeForce RTX 3080",
       "manufacturer": "NVIDIA",
-      "latest_version": "560.94",
+      "latest_version": "965.55",
       "download_url": "https://us.download.nvidia.com/Windows/560.94/560.94-desktop-win10-win11-64bit-international-dch-whql.exe",
-      "category": "display"
+      "category": "display",
+      "_auto_updated": "2026-07-05T20:07:01.816129"
     },
     "PCI\\VEN_10DE&DEV_2684": {
       "name": "NVIDIA GeForce RTX 4090",
       "manufacturer": "NVIDIA",
-      "latest_version": "560.94",
+      "latest_version": "965.55",
       "download_url": "https://us.download.nvidia.com/Windows/560.94/560.94-desktop-win10-win11-64bit-international-dch-whql.exe",
-      "category": "display"
+      "category": "display",
+      "_auto_updated": "2026-07-05T20:07:01.816131"
     },
     "PCI\\VEN_1002": {
       "name": "AMD GPU",
@@ -335,5 +339,5 @@
     "input": "Input devices",
     "other": "Altri dispositivi"
   },
-  "last_auto_update": "2026-07-05T15:56:38.500702"
+  "last_auto_update": "2026-07-05T20:07:01.816137"
 }

@@ -41,9 +41,12 @@ def main():
         print(f"{'Dispositivo':40s} {'Driver attuale':30s} {'Stato':10s}")
         print("-" * 80)
         for r in results:
-            print(f"{r['device_name'][:38]:40s} {r['current_version'][:28]:30s} {r['status']:10s}")
+            dv = r.device_name[:38] if r.device_name else 'N/A'
+            cv = r.driver_version[:28] if r.driver_version else 'N/A'
+            st = r.status or 'UNKNOWN'
+            print(f"{dv:40s} {cv:30s} {st:10s}")
         print(f"\nTrovati: {len(results)} dispositivi")
-        outdated = sum(1 for r in results if r['status'] == 'OUTDATED')
+        outdated = sum(1 for r in results if r.status == 'OUTDATED')
         print(f"Obsoleti: {outdated}")
         return
 
