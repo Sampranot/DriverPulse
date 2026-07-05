@@ -1,0 +1,14 @@
+# DriverPulse — Requirements
+# Install: pip install -r requirements.txt
+
+# Windows Management Instrumentation
+wmi>=1.5.1
+
+# WebSocket client (telemetria)
+websocket-client>=1.8.0
+
+# Version comparison
+packaging>=24.0
+
+# GUI (built-in, no extra dep)
+# tkinter e' incluso in Python
