@@ -1,8 +1,8 @@
 {
   "version": "1.1.0",
-  "updated": "2026-07-05T20:07:01.816136",
+  "updated": "2026-07-05T20:20:26.127056",
   "source": "curated",
-  "total_entries": 45,
+  "total_entries": 54,
   "drivers": {
     "PCI\\VEN_10DE": {
       "name": "NVIDIA GPU",
@@ -65,23 +65,26 @@
     "PCI\\VEN_8086": {
       "name": "Intel Graphics",
       "manufacturer": "Intel",
-      "latest_version": "32.0.101.6314",
-      "download_url": "https://downloadmirror.intel.com/839579/igfx_win_101.6314.exe",
-      "category": "display"
+      "latest_version": "101.8860",
+      "download_url": "https://www.techpowerup.com/download/intel-graphics-drivers/",
+      "category": "display",
+      "_auto_updated": "2026-07-05T20:20:26.127015"
     },
     "PCI\\VEN_8086&DEV_9A49": {
       "name": "Intel Iris Xe Graphics",
       "manufacturer": "Intel",
-      "latest_version": "32.0.101.6314",
-      "download_url": "https://downloadmirror.intel.com/839579/igfx_win_101.6314.exe",
-      "category": "display"
+      "latest_version": "101.8860",
+      "download_url": "https://www.techpowerup.com/download/intel-graphics-drivers/",
+      "category": "display",
+      "_auto_updated": "2026-07-05T20:20:26.127032"
     },
     "PCI\\VEN_8086&DEV_A780": {
       "name": "Intel Arc A770 Graphics",
       "manufacturer": "Intel",
-      "latest_version": "32.0.101.6314",
-      "download_url": "https://downloadmirror.intel.com/839579/igfx_win_101.6314.exe",
-      "category": "display"
+      "latest_version": "101.8860",
+      "download_url": "https://www.techpowerup.com/download/intel-graphics-drivers/",
+      "category": "display",
+      "_auto_updated": "2026-07-05T20:20:26.127044"
     },
     "PCI\\VEN_10EC": {
       "name": "Realtek PCIe Ethernet",
@@ -327,6 +330,70 @@
       "latest_version": "10.0.0.0",
       "download_url": "",
       "category": "other"
+    },
+    "PCI\\VEN_10DE&DEV_1F06": {
+      "name": "NVIDIA GeForce RTX 2060 SUPER",
+      "manufacturer": "NVIDIA",
+      "latest_version": "965.55",
+      "download_url": "https://us.download.nvidia.com/Windows/560.94/560.94-desktop-win10-win11-64bit-international-dch-whql.exe",
+      "category": "display",
+      "_auto_updated": "2026-07-05T20:07:01.816128"
+    },
+    "PCI\\VEN_8086&DEV_A2CA": {
+      "name": "Intel 300 Series LPC Controller (Z370)",
+      "manufacturer": "Intel",
+      "latest_version": "10.1.11.4",
+      "download_url": "",
+      "category": "chipset"
+    },
+    "PCI\\VEN_8086&DEV_A2A3": {
+      "name": "Intel SMBus Controller (300 Series)",
+      "manufacturer": "Intel",
+      "latest_version": "10.1.11.4",
+      "download_url": "",
+      "category": "chipset"
+    },
+    "PCI\\VEN_8086&DEV_A2F0": {
+      "name": "Intel High Definition Audio Controller (300 Series)",
+      "manufacturer": "Intel",
+      "latest_version": "10.28.0.0",
+      "download_url": "",
+      "category": "audio"
+    },
+    "PCI\\VEN_8086&DEV_24FB": {
+      "name": "Intel Dual Band Wireless-AC 3168 Bluetooth",
+      "manufacturer": "Intel",
+      "latest_version": "23.90.1.5",
+      "download_url": "",
+      "category": "bluetooth"
+    },
+    "PCI\\VEN_8086&DEV_15B8": {
+      "name": "Intel Ethernet Connection I219-V/LM",
+      "manufacturer": "Intel",
+      "latest_version": "29.0.0.0",
+      "download_url": "",
+      "category": "network"
+    },
+    "USB\\VID_8087&PID_0AA7": {
+      "name": "Intel Wireless Bluetooth (3168/9560)",
+      "manufacturer": "Intel",
+      "latest_version": "23.90.0.3",
+      "download_url": "",
+      "category": "bluetooth"
+    },
+    "HDAUDIO\\FUNC_01&VEN_10DE&DEV_0093": {
+      "name": "NVIDIA High Definition Audio",
+      "manufacturer": "NVIDIA",
+      "latest_version": "1.4.5.6",
+      "download_url": "",
+      "category": "audio"
+    },
+    "HDAUDIO\\FUNC_01&VEN_10EC&DEV_0887": {
+      "name": "Realtek ALC887/888 High Definition Audio",
+      "manufacturer": "Realtek",
+      "latest_version": "6.0.9857.1",
+      "download_url": "https://www.realtek.com/en/component/zoo/category/pc-audio-codecs-high-definition-audio-codecs-software",
+      "category": "audio"
     }
   },
   "categories": {
@@ -339,5 +406,5 @@
     "input": "Input devices",
     "other": "Altri dispositivi"
   },
-  "last_auto_update": "2026-07-05T20:07:01.816137"
+  "last_auto_update": "2026-07-05T20:20:26.127063"
 }

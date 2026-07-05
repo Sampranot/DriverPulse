@@ -152,15 +152,74 @@ class DriverDBUpdater:
         return None
 
     def fetch_intel_graphics_version(self) -> Optional[Dict]:
-        """Recupera ultima versione driver Intel Graphics."""
-        # Crea contesto SSL che accetta certificati (alcuni server Intel hanno chain issues)
+        """Recupera ultima versione driver Intel Graphics.
+        
+        Il sito ufficiale Intel blocca con 403 (Cloudflare/Akamai).
+        Fallback: TechPowerUp che e' accessibile via scraping semplice.
+        """
+        sources = [
+            self._fetch_intel_techpowerup,
+            self._fetch_intel_official_fallback,
+        ]
+        
+        for source_fn in sources:
+            try:
+                result = source_fn()
+                if result:
+                    return result
+            except Exception:
+                continue
+        
+        return None
+    
+    def _fetch_intel_techpowerup(self) -> Optional[Dict]:
+        """Scraping da TechPowerUp per Intel Graphics drivers."""
+        url = 'https://www.techpowerup.com/download/intel-graphics-drivers/'
+        req = urllib.request.Request(url, headers={
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        })
+        with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
+            html = resp.read().decode('utf-8', errors='ignore')
+        
+        # Trova TUTTE le versioni nella pagina, poi prendi la piu' alta
+        all_versions = set()
+        patterns = [
+            r'Intel\s*Graphics\s*Drivers\s*(\d+\.\d+(?:\.\d+){0,2})\s*WHQL',
+            r'Intel\s*Graphics\s*Drivers\s*(\d+\.\d+(?:\.\d+){0,2})',
+        ]
+        for pattern in patterns:
+            for match in re.finditer(pattern, html, re.IGNORECASE):
+                ver = match.group(1)
+                parts = [p for p in ver.split('.') if p.isdigit()]
+                if 2 <= len(parts) <= 4:
+                    all_versions.add(ver)
+        
+        if not all_versions:
+            return None
+        
+        # Prendi la versione con primo segmento piu' alto
+        # (Le versioni Intel moderne iniziano con 100+ mentre legacy con 2x/3x)
+        def _sort_key(v):
+            try:
+                return [int(x) for x in v.split('.')]
+            except:
+                return [0]
+        
+        best = sorted(all_versions, key=_sort_key, reverse=True)[0]
+        return {
+            'latest_version': best,
+            'download_url': url,
+            'source': 'intel_techpowerup',
+            'fetched': datetime.now().isoformat(),
+        }
+    
+    def _fetch_intel_official_fallback(self) -> Optional[Dict]:
+        """Tentativo su sito Intel ufficiale con contesto SSL permissivo."""
         ctx = ssl.create_default_context()
         ctx.check_hostname = False
         ctx.verify_mode = ssl.CERT_NONE
 
-        # URL alternativi per driver Intel
         urls = [
-            'https://www.intel.com/content/www/us/en/support/articles/000090744/graphics.html',
             'https://www.intel.com/content/www/us/en/download/19351/intel-graphics-driver-for-windows.html',
             'https://downloadcenter.intel.com/product/80939/Intel-Graphics-Driver',
         ]
@@ -174,19 +233,17 @@ class DriverDBUpdater:
                 patterns = [
                     r'version\s*(\d+\.\d+\.\d+\.\d+)',
                     r'(\d{2}\.\d{1,3}\.\d{1,4}\.\d{1,4})',
-                    r'Version:\s*(\d+[\d.]*\d+)',
                 ]
                 for pattern in patterns:
                     match = re.search(pattern, html, re.IGNORECASE)
                     if match:
                         ver = match.group(1)
-                        # Verifica che sia una versione valida
                         parts = [p for p in ver.split('.') if p.isdigit()]
                         if len(parts) >= 3:
                             return {
                                 'latest_version': ver,
                                 'download_url': url,
-                                'source': 'intel',
+                                'source': 'intel_official',
                                 'fetched': datetime.now().isoformat(),
                             }
             except Exception:
@@ -195,33 +252,42 @@ class DriverDBUpdater:
         return None
 
     def fetch_realtek_audio_version(self) -> Optional[Dict]:
-        """Recupera ultima versione driver Realtek Audio."""
+        """Recupera ultima versione driver Realtek Audio.
+        
+        Il sito ufficiale Realtek ora usa API JSON:
+        https://www.realtek.com/Download/ListAllDownloadItem?cate_id=593
+        Le versioni sono nel formato 'R2.83' (pacchetto), non numeri driver.
+        Usiamo l'API JSON per confronto delle versioni pacchetto.
+        """
         try:
-            url = ('https://www.realtek.com/en/component/zoo/category/'
-                   'pc-audio-codecs-high-definition-audio-codecs-software')
-            req = urllib.request.Request(url, headers=HEADERS)
-            
+            url = 'https://www.realtek.com/Download/ListAllDownloadItem?cate_id=593'
+            req = urllib.request.Request(url, headers={
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+            })
             with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
-                html = resp.read().decode('utf-8', errors='ignore')
-
-            patterns = [
-                r'(\d+\.\d+\.\d+\.\d+)',
-                r'Version\s*(\d+[\d.]*\d+)',
-            ]
-            for pattern in patterns:
-                match = re.search(pattern, html)
-                if match:
-                    ver = match.group(1)
-                    if len(ver.split('.')) >= 4:
-                        return {
-                            'latest_version': ver,
-                            'download_url': url,
-                            'source': 'realtek',
-                            'fetched': datetime.now().isoformat(),
-                        }
+                data = json.loads(resp.read().decode())
+            
+            if data.get('Pass') and data.get('Data'):
+                items = data['Data'].get('DownloadItems', {}).get('Windows', [])
+                # Prendi la versione piu' recente (formato R2.xx)
+                versions = [item.get('Version', '') for item in items 
+                           if item.get('Version', '').startswith('R')]
+                if versions:
+                    def _r_sort(v):
+                        try:
+                            return [int(x) for x in v.replace('R', '').split('.')]
+                        except:
+                            return [0]
+                    best = sorted(versions, key=_r_sort, reverse=True)[0]
+                    return {
+                        'latest_version': best,
+                        'download_url': url,
+                        'source': 'realtek_api',
+                        'fetched': datetime.now().isoformat(),
+                    }
         except Exception as e:
-            print(f'[DB_UPDATER] Realtek fetch error: {e}')
-
+            print(f'[DB_UPDATER] Realtek API error: {e}')
+        
         return None
 
     def fetch_all(self) -> Dict[str, Optional[Dict]]:
@@ -275,17 +341,16 @@ class DriverDBUpdater:
             },
             'intel_graphics': {
                 'hw_ids': ['PCI\\VEN_8086', 'PCI\\VEN_8086&DEV_9A49',
-                          'PCI\\VEN_8086&DEV_A780'],
-                'version_field': 'latest_version',
-                'url_field': 'download_url',
-            },
-            'realtek_audio': {
-                'hw_ids': ['HDAUDIO\\FUNC_01&VEN_10EC', 'HDAUDIO\\FUNC_01&VEN_10EC&DEV_0900',
-                          'HDAUDIO\\FUNC_01&VEN_10EC&DEV_0899', 'HDAUDIO\\FUNC_01&VEN_10EC&DEV_0892'],
+                          'PCI\\VEN_8086&DEV_A780',
+                          'PCI\\VEN_8086&DEV_3E30',  # Intel HD Graphics 630 / UHD 630
+                          ],
                 'version_field': 'latest_version',
                 'url_field': 'download_url',
             },
         }
+        # Nota: Realtek Audio escluso dalle auto-mapping perche' 
+        # l'API restituisce versioni pacchetto (R2.83) non confrontabili
+        # con i numeri di versione driver (6.0.9743.1)
 
         for source_name, source_result in results.items():
             if source_name == 'fetched_at' or not source_result:
