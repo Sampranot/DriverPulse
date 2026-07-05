@@ -11,14 +11,13 @@ from packaging.version import Version
 from datetime import datetime, timedelta
 
 from .detector import get_detector, DeviceInfo
+from .paths import get_db_path
 
 
 # Cache del database driver
 _db_cache = None
 _db_last_load = None
 DB_CACHE_TTL = 3600  # 1 ora
-
-DRIVER_DB_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'db', 'driver_db.json')
 
 
 def _load_driver_db() -> Dict:
@@ -29,7 +28,7 @@ def _load_driver_db() -> Dict:
     if _db_cache and _db_last_load and (now - _db_last_load).seconds < DB_CACHE_TTL:
         return _db_cache
 
-    db_path = DRIVER_DB_PATH
+    db_path = get_db_path()
     if not os.path.exists(db_path):
         # Crea database vuoto se non esiste
         _db_cache = {'drivers': {}, 'version': '1.0', 'updated': now.isoformat()}
@@ -49,8 +48,8 @@ def _load_driver_db() -> Dict:
 def _save_driver_db(db: Dict):
     """Salva il database dei driver."""
     try:
-        os.makedirs(os.path.dirname(DRIVER_DB_PATH), exist_ok=True)
-        with open(DRIVER_DB_PATH, 'w', encoding='utf-8') as f:
+        os.makedirs(os.path.dirname(get_db_path()), exist_ok=True)
+        with open(get_db_path(), 'w', encoding='utf-8') as f:
             json.dump(db, f, indent=2, default=str)
     except Exception:
         pass

@@ -17,8 +17,15 @@ from typing import Dict, Optional, List, Tuple
 from datetime import datetime
 from pathlib import Path
 
+try:
+    from .paths import get_db_path
+except ImportError:
+    import os
+    _BASE = os.path.dirname(os.path.dirname(__file__))
+    def get_db_path():
+        return os.path.join(_BASE, 'db', 'driver_db.json')
+
 # Costanti
-DB_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'db', 'driver_db.json')
 CACHE_TTL = 86400  # 24 ore tra aggiornamenti
 REQUEST_TIMEOUT = 15
 
@@ -312,11 +319,11 @@ class DriverDBUpdater:
         if not force and (now - self._last_fetch) < CACHE_TTL:
             return True, 'Database già aggiornato (cache valida)'
 
-        if not os.path.exists(DB_PATH):
-            return False, f'Database non trovato: {DB_PATH}'
+        if not os.path.exists(get_db_path()):
+            return False, f'Database non trovato: {get_db_path()}'
 
         try:
-            with open(DB_PATH, 'r', encoding='utf-8') as f:
+            with open(get_db_path(), 'r', encoding='utf-8') as f:
                 db = json.load(f)
         except Exception as e:
             return False, f'Errore lettura database: {e}'
@@ -380,7 +387,7 @@ class DriverDBUpdater:
         if updated > 0:
             db['updated'] = datetime.now().isoformat()
             db['last_auto_update'] = datetime.now().isoformat()
-            with open(DB_PATH, 'w', encoding='utf-8') as f:
+            with open(get_db_path(), 'w', encoding='utf-8') as f:
                 json.dump(db, f, indent=2, ensure_ascii=False)
             self._last_fetch = now
             return True, f'Database aggiornato: {updated} entry modificate'

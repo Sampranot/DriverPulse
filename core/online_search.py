@@ -19,8 +19,13 @@ from urllib.error import URLError
 
 # Cache
 _CACHE = {}
-_CACHE_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)),
-                           'db', 'search_cache.json')
+try:
+    from .paths import get_cache_path as _get_cache_path
+    _CACHE_PATH = _get_cache_path()
+except ImportError:
+    import os
+    _CACHE_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)),
+                               'db', 'search_cache.json')
 _CACHE_TTL = 86400 * 30  # 30 giorni
 
 # Headers per sembrare un browser
