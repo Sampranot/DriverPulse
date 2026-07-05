@@ -1,0 +1,1212 @@
+{
+  "PCI_VEN_10DE_DEV_1F06": {
+    "data": {
+      "name": "TU106 [GeForce RTX 2060 SUPER]",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=PCI%5CVEN_10DE%26DEV_1F06",
+      "source": "devicehunt"
+    },
+    "_ts": 1783275840.113607
+  },
+  "PCI_VEN_8086_DEV_3E30": {
+    "data": {
+      "name": "8th/9th Gen Core 8-core Desktop Processor Host Bridge/DRAM Registers [Coffee Lake S]",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=PCI%5CVEN_8086%26DEV_3E30",
+      "source": "devicehunt"
+    },
+    "_ts": 1783275841.4937403
+  },
+  "USB_VID_8087_PID_0AA7": {
+    "data": {
+      "name": "",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=USB%5CVID_8087%26PID_0AA7",
+      "source": "unknown"
+    },
+    "_ts": 1783275841.7816389
+  },
+  "MMDEVAPI_AudioEndpoints": {
+    "data": {
+      "name": "Line 1",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275886.5243175
+  },
+  "Root_MetaVirtualScreenDriver": {
+    "data": {
+      "name": "Meta Virtual Monitor",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275886.7408426
+  },
+  "HID_VID_1462_PID_B930_REV_0001": {
+    "data": {
+      "name": "Dispositivo compatibile HID",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275886.9405046
+  },
+  "PCI_VEN_8086_DEV_1901_SUBSYS_7C081462_REV_0D": {
+    "data": {
+      "name": "6th-10th Gen Core Processor PCIe Controller (x16)",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=PCI%5CVEN_8086%26DEV_1901%26SUBSYS_7C081462%26REV_0D",
+      "source": "devicehunt"
+    },
+    "_ts": 1783275888.3721285
+  },
+  "ACPI_VEN_PNP_DEV_0C02": {
+    "data": {
+      "name": "Risorse scheda madre",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275888.5803046
+  },
+  "SWD_WPDBUSENUM_{28135E7A-CEE4-11EB-829F-D83BBF65B2CD}#0000000000100000": {
+    "data": {
+      "name": "SAM 2 THERABYTE",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275888.7824576
+  },
+  "USBSTOR_DiskTOSHIBA_External_USB_3.05438": {
+    "data": {
+      "name": "TOSHIBA External USB 3.0 USB Device",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275888.9959235
+  },
+  "ACPI_VEN_PNP_DEV_0C0B": {
+    "data": {
+      "name": "Ventola ACPI",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275889.2152517
+  },
+  "PCI_VEN_10DE_DEV_10F9_SUBSYS_C7571462_REV_A1": {
+    "data": {
+      "name": "TU106 High Definition Audio Controller",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=PCI%5CVEN_10DE%26DEV_10F9%26SUBSYS_C7571462%26REV_A1",
+      "source": "devicehunt"
+    },
+    "_ts": 1783275890.7796464
+  },
+  "ACPI_VEN_ACPI_DEV_000C": {
+    "data": {
+      "name": "Aggregatore processore ACPI",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275890.9804916
+  },
+  "PRINTENUM_LocalPrintQueue": {
+    "data": {
+      "name": "Coda di stampa radice",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275891.1880586
+  },
+  "USB_VID_1462_PID_B930_REV_0001": {
+    "data": {
+      "name": "Dispositivo di input USB",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=USB%5CVID_1462%26PID_B930%26REV_0001",
+      "source": "unknown"
+    },
+    "_ts": 1783275891.3897254
+  },
+  "ROOT_VOLMGR": {
+    "data": {
+      "name": "Archiviazione volumi",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275891.5981374
+  },
+  "ms_pppoeminiport": {
+    "data": {
+      "name": "WAN Miniport",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275891.7998729
+  },
+  "PCI_VEN_8086_DEV_A29B_SUBSYS_7C081462_REV_F0": {
+    "data": {
+      "name": "200 Series/Z370 Chipset Family PCIe Root Port #12",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=PCI%5CVEN_8086%26DEV_A29B%26SUBSYS_7C081462%26REV_F0",
+      "source": "devicehunt"
+    },
+    "_ts": 1783275893.2705765
+  },
+  "HID_VID_04D9_PID_1702_REV_0101_MI_01_Col02": {
+    "data": {
+      "name": "Dispositivo controllo consumi compatibile HID",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275893.4778426
+  },
+  "root_VMBus": {
+    "data": {
+      "name": "Provider bus macchina virtuale Hyper-V Microsoft",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275893.6846652
+  },
+  "SWC_3C4852D6-D47B-4F46-B05E-B5EDC1AA440E": {
+    "data": {
+      "name": "Intel Dynamic Application Loader Host Interface",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275893.8907804
+  },
+  "SCSI_DiskNVMe______________WDC_PC_SN730_SDBPNTY-1T00-103211110000": {
+    "data": {
+      "name": "WDC PC SN730 SDBPNTY-1T00-1032",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275894.0921535
+  },
+  "ROOT_BasicDisplay": {
+    "data": {
+      "name": "Driver video base Microsoft",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275894.2941709
+  },
+  "{5d624f94-8850-40c3-a3fa-a4fd2080baf3}_vwifimp_wfd": {
+    "data": {
+      "name": "Microsoft Wi-Fi Direct Virtual Adapter",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275894.507596
+  },
+  "ACPI_VEN_PNP_DEV_0C0E": {
+    "data": {
+      "name": "Pulsante sospensione ACPI",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275894.7138634
+  },
+  "ROOT_hvservice": {
+    "data": {
+      "name": "Servizio hypervisor Microsoft",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275894.9249988
+  },
+  "MONITOR_VES3700": {
+    "data": {
+      "name": "Generic Monitor",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275895.1429062
+  },
+  "PCI_VEN_8086_DEV_A2A1_SUBSYS_7C081462_REV_00": {
+    "data": {
+      "name": "200 Series/Z370 Chipset Family PMC",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=PCI%5CVEN_8086%26DEV_A2A1%26SUBSYS_7C081462%26REV_00",
+      "source": "devicehunt"
+    },
+    "_ts": 1783275896.6208086
+  },
+  "SWC_PROVIDER_INTEL_COMPONENT_ICLSCLIENT": {
+    "data": {
+      "name": "Intel iCLS Client",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275896.8297484
+  },
+  "ACPI_ThermalZone": {
+    "data": {
+      "name": "Zona termica ACPI",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275897.0497763
+  },
+  "SWD_MSRRAS_{5E259276-BC7E-40E3-B93B-8F89B5F3ABC0}": {
+    "data": {
+      "name": "Microsoft RRAS Root Enumerator",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275897.258341
+  },
+  "STORAGE_Volume": {
+    "data": {
+      "name": "Volume",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275897.4705014
+  },
+  "USB_VID_0000_PID_3825_REV_0100": {
+    "data": {
+      "name": "Dispositivo di input USB",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=USB%5CVID_0000%26PID_3825%26REV_0100",
+      "source": "unknown"
+    },
+    "_ts": 1783275897.6841204
+  },
+  "ms_pptpminiport": {
+    "data": {
+      "name": "WAN Miniport",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275897.8906794
+  },
+  "SWD_IPP_A48833A3-174C-4C3D-8ACF-FC56FA674B30": {
+    "data": {
+      "name": "HP ENVY 6000 series [259833]",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275898.101109
+  },
+  "ROOT_VID": {
+    "data": {
+      "name": "Driver infrastruttura di virtualizzazione Hyper-V Microsoft",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275898.3143651
+  },
+  "USB_VID_1B3F_PID_2008_REV_0100_MI_03": {
+    "data": {
+      "name": "Dispositivo di input USB",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=USB%5CVID_1B3F%26PID_2008%26REV_0100%26MI_03",
+      "source": "unknown"
+    },
+    "_ts": 1783275898.531615
+  },
+  "PCI_VEN_8086_DEV_1911_SUBSYS_7C081462_REV_00": {
+    "data": {
+      "name": "Xeon E3-1200 v5/v6 / E3-1500 v5 / 6th/7th/8th Gen Core Processor Gaussian Mixture Model",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=PCI%5CVEN_8086%26DEV_1911%26SUBSYS_7C081462%26REV_00",
+      "source": "devicehunt"
+    },
+    "_ts": 1783275899.9852283
+  },
+  "ACPI_VEN_PNP_DEV_0103": {
+    "data": {
+      "name": "Timer eventi alta precisione",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275900.208406
+  },
+  "HID_VID_1B3F_PID_2008_REV_0100_MI_03": {
+    "data": {
+      "name": "Dispositivo controllo consumi compatibile HID",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275900.4244995
+  },
+  "SCSI_DiskATA_____ST2000DM008-2FR10001": {
+    "data": {
+      "name": "ST2000DM008-2FR102",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275900.630225
+  },
+  "ms_agilevpnminiport": {
+    "data": {
+      "name": "WAN Miniport",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275900.8350964
+  },
+  "ROOT_CompositeBus": {
+    "data": {
+      "name": "Enumeratore bus composito",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275901.0512636
+  },
+  "ROOT_vdrvroot": {
+    "data": {
+      "name": "Enumeratore unit\u00e0 virtuale Microsoft",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275901.2537296
+  },
+  "ACPI_VEN_PNP_DEV_0000": {
+    "data": {
+      "name": "Programmable Interrupt Controller",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275901.4729087
+  },
+  "mf_envy_6000_series_wsd_ip_scan": {
+    "data": {
+      "name": "HP ENVY 6000 series",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275901.6764321
+  },
+  "Root_Spaceport": {
+    "data": {
+      "name": "Controller spazi di archiviazione Microsoft",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275901.880219
+  },
+  "USB_VID_0480_PID_B207_REV_0315": {
+    "data": {
+      "name": "Dispositivo di archiviazione di massa USB",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=USB%5CVID_0480%26PID_B207%26REV_0315",
+      "source": "unknown"
+    },
+    "_ts": 1783275902.0905035
+  },
+  "PRINTENUM_{0f4130dd-19c7-7ab6-99a1-980f03b2ee4e}": {
+    "data": {
+      "name": "Microsoft XPS Document Writer",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275902.2974882
+  },
+  "USB_VID_1B3F_PID_2008_REV_0100_MI_00": {
+    "data": {
+      "name": "USB Audio Device",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=USB%5CVID_1B3F%26PID_2008%26REV_0100%26MI_00",
+      "source": "unknown"
+    },
+    "_ts": 1783275902.529527
+  },
+  "ACPI_VEN_PNP_DEV_0501": {
+    "data": {
+      "name": "Porta di comunicazione",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275902.737286
+  },
+  "PCI_VEN_8086_DEV_A294_SUBSYS_7C081462_REV_F0": {
+    "data": {
+      "name": "200 Series/Z370 Chipset Family PCIe Root Port #5",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=PCI%5CVEN_8086%26DEV_A294%26SUBSYS_7C081462%26REV_F0",
+      "source": "devicehunt"
+    },
+    "_ts": 1783275904.5312386
+  },
+  "root_kdnic": {
+    "data": {
+      "name": "Microsoft Kernel Debug Network Adapter",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275904.7304392
+  },
+  "SWC_5DCEB103-DD64-403C-A17C-94FC5F917A9C": {
+    "data": {
+      "name": "Intel Management and Security Application Local Management",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275904.9455118
+  },
+  "SWC_VEN_10EC_AID_0001": {
+    "data": {
+      "name": "Realtek Audio Effects Component",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275905.1874695
+  },
+  "PCI_VEN_10DE_DEV_1ADB_SUBSYS_C7571462_REV_A1": {
+    "data": {
+      "name": "TU106 USB Type-C UCSI Controller",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=PCI%5CVEN_10DE%26DEV_1ADB%26SUBSYS_C7571462%26REV_A1",
+      "source": "devicehunt"
+    },
+    "_ts": 1783275906.7172806
+  },
+  "PCI_VEN_8086_DEV_A2AF_SUBSYS_7C081462_REV_00": {
+    "data": {
+      "name": "200 Series/Z370 Chipset Family USB 3.0 xHCI Controller",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=PCI%5CVEN_8086%26DEV_A2AF%26SUBSYS_7C081462%26REV_00",
+      "source": "devicehunt"
+    },
+    "_ts": 1783275908.0967104
+  },
+  "SWC_VEN_MSFT_AUDIO_EFFECTPACK_VOICECLARITY": {
+    "data": {
+      "name": "Voice Clarity",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275908.3223157
+  },
+  "PRINTENUM_microsoftmicrosoft_s7d14": {
+    "data": {
+      "name": "Fax",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275908.5283446
+  },
+  "root_umbus": {
+    "data": {
+      "name": "Enumeratore bus radice UMBus",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275908.7397916
+  },
+  "HID_VID_04D9_PID_1702_REV_0101_MI_00": {
+    "data": {
+      "name": "Tastiera HID",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275908.9492385
+  },
+  "ACPI_VEN_PNP_DEV_0C04": {
+    "data": {
+      "name": "Coprocessore matematico",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275909.1527896
+  },
+  "USB_ROOT_HUB30_VID10DE_PID1ADA_REV00A1": {
+    "data": {
+      "name": "Hub radice USB",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=USB%5CROOT_HUB30%26VID10DE%26PID1ADA%26REV00A1",
+      "source": "unknown"
+    },
+    "_ts": 1783275909.36328
+  },
+  "SWD_RADIO_{3DB5895D-CC28-44B3-AD3D-6F01A782B8D2}": {
+    "data": {
+      "name": "Microsoft Radio Device Enumeration Bus",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275909.5683334
+  },
+  "SWD_MSDAS_{CE958E9A-424F-4C88-86F4-11314821E75A}": {
+    "data": {
+      "name": "Microsoft Device Association Root Enumerator",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275909.7757618
+  },
+  "acpiapic": {
+    "data": {
+      "name": "PC ACPI basato su x64",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275909.989332
+  },
+  "ACPI_VEN_PNP_DEV_0C14": {
+    "data": {
+      "name": "Interfaccia di gestione Microsoft Windows per ACPI",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275910.1980128
+  },
+  "ms_ndiswanbh": {
+    "data": {
+      "name": "WAN Miniport",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275910.408381
+  },
+  "ms_ndiswanip": {
+    "data": {
+      "name": "WAN Miniport",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275910.6374793
+  },
+  "ACPI_VEN_PNP_DEV_0A08": {
+    "data": {
+      "name": "Complesso radice PCI Express",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275910.8598573
+  },
+  "SWC_VEN_10EC_SID_0001": {
+    "data": {
+      "name": "Realtek Audio Universal Service",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275911.0689805
+  },
+  "root_Vpcivsp": {
+    "data": {
+      "name": "Server PCI Hyper-V Microsoft",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275911.2802398
+  },
+  "USB_VID_05E3_PID_0608_REV_6070": {
+    "data": {
+      "name": "Hub USB generico",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=USB%5CVID_05E3%26PID_0608%26REV_6070",
+      "source": "unknown"
+    },
+    "_ts": 1783275911.4943185
+  },
+  "ACPI_VEN_PNP_DEV_0C0C": {
+    "data": {
+      "name": "Pulsante alimentazione ACPI",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275911.7327678
+  },
+  "ACPI_HAL_PNP0C08": {
+    "data": {
+      "name": "Sistema compatibile ACPI Microsoft",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275911.9376848
+  },
+  "HTREE_ROOT_0": {
+    "data": {
+      "name": "Unknown Device",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275912.1406097
+  },
+  "USB_ROOT_HUB30_VID8086_PIDA2AF_REV0000": {
+    "data": {
+      "name": "Hub radice USB",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=USB%5CROOT_HUB30%26VID8086%26PIDA2AF%26REV0000",
+      "source": "unknown"
+    },
+    "_ts": 1783275912.3640244
+  },
+  "ROOT_BasicRender": {
+    "data": {
+      "name": "Driver rendering base Microsoft",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275912.5797126
+  },
+  "ms_sstpminiport": {
+    "data": {
+      "name": "WAN Miniport",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275912.7876883
+  },
+  "ACPI_VEN_PNP_DEV_0100": {
+    "data": {
+      "name": "Timer di sistema",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275913.0004718
+  },
+  "ACPI_HAL_UEFI": {
+    "data": {
+      "name": "Sistema compatibile UEFI Microsoft",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275913.2075388
+  },
+  "PCI_VEN_8086_DEV_A2B1_SUBSYS_7C081462_REV_00": {
+    "data": {
+      "name": "200 Series/Z370 Chipset Family Thermal Subsystem",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=PCI%5CVEN_8086%26DEV_A2B1%26SUBSYS_7C081462%26REV_00",
+      "source": "devicehunt"
+    },
+    "_ts": 1783275914.6488242
+  },
+  "PCI_VEN_8086_DEV_3E30_SUBSYS_7C081462_REV_0D": {
+    "data": {
+      "name": "8th/9th Gen Core 8-core Desktop Processor Host Bridge/DRAM Registers [Coffee Lake S]",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=PCI%5CVEN_8086%26DEV_3E30%26SUBSYS_7C081462%26REV_0D",
+      "source": "devicehunt"
+    },
+    "_ts": 1783275916.4793983
+  },
+  "WSDPRINT_HPENVY_6000_seriesFD15": {
+    "data": {
+      "name": "HP ENVY 6000 series PCL-3",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275916.691593
+  },
+  "ACPI_VEN_INT_DEV_0800": {
+    "data": {
+      "name": "Dispositivo legacy",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275916.9066536
+  },
+  "ACPI_VEN_MSFT_DEV_0101": {
+    "data": {
+      "name": "Trusted Platform Module 2.0",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275917.1106038
+  },
+  "ACPI_FixedButton": {
+    "data": {
+      "name": "Pulsante caratteristica ACPI fissa",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275917.3211212
+  },
+  "UEFI_RES_{60a1360a-a2e7-5d9a-afe0-ea1b1fe439b3}_REV_2": {
+    "data": {
+      "name": "Firmware del sistema",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275917.5760942
+  },
+  "ROOT_MrVadVirtualDevice": {
+    "data": {
+      "name": "Mixed Reality Link Audio Device",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275917.7728717
+  },
+  "PCI_VEN_8086_DEV_A2BA_SUBSYS_7C081462_REV_00": {
+    "data": {
+      "name": "200 Series/Z370 Chipset Family MEI #1",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=PCI%5CVEN_8086%26DEV_A2BA%26SUBSYS_7C081462%26REV_00",
+      "source": "devicehunt"
+    },
+    "_ts": 1783275919.3305652
+  },
+  "ACPI_VEN_INT_DEV_3F0D": {
+    "data": {
+      "name": "Intel Watchdog Timer Driver WDT)",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275919.5683124
+  },
+  "VirtualAudioCable_83ed7f0e-2028-4956-b0b4-39c76fdaef1d": {
+    "data": {
+      "name": "Virtual Audio Cable",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275919.7892587
+  },
+  "USB_VID_04D9_PID_1702_REV_0101": {
+    "data": {
+      "name": "Dispositivo USB composito",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=USB%5CVID_04D9%26PID_1702%26REV_0101",
+      "source": "unknown"
+    },
+    "_ts": 1783275920.0215075
+  },
+  "ACPI_VEN_INT_DEV_33A1": {
+    "data": {
+      "name": "Plug-in motore di alimentazione Intel",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275920.2288244
+  },
+  "COMPUTER_{0E9648E1-1BFB-5E62-A268-ED1E3735F543}": {
+    "data": {
+      "name": "Micro-Star International Co., Ltd. H310 Gaming MAG Codex 5",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275920.4417977
+  },
+  "root_storvsp": {
+    "data": {
+      "name": "Server disco virtuale Hyper-V Microsoft",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275920.6459725
+  },
+  "SWC_VEN_10EC_HID_0001": {
+    "data": {
+      "name": "Realtek Hardware Support Application",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275920.8476074
+  },
+  "USB_VID_0955_PID_9000": {
+    "data": {
+      "name": "NVIDIA Virtual Audio Device",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=USB%5CVID_0955%26PID_9000",
+      "source": "unknown"
+    },
+    "_ts": 1783275921.0682347
+  },
+  "SWD_MMDEVAPI_MICROSOFTGSWAVETABLESYNTH": {
+    "data": {
+      "name": "Microsoft GS Wavetable Synth",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275921.2731872
+  },
+  "USB_VID_04D9_PID_1702_REV_0101_MI_00": {
+    "data": {
+      "name": "Dispositivo di input USB",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=USB%5CVID_04D9%26PID_1702%26REV_0101%26MI_00",
+      "source": "unknown"
+    },
+    "_ts": 1783275921.4787672
+  },
+  "ROOT_NdisVirtualBus": {
+    "data": {
+      "name": "Enumeratore scheda di rete virtuale NDIS",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275921.694121
+  },
+  "PRINTENUM_{084f01fa-e634-4d77-83ee-074817c03581}": {
+    "data": {
+      "name": "Microsoft Print to PDF",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275921.8981092
+  },
+  "PRINTENUM_hpenvy_6000_seriesfd15": {
+    "data": {
+      "name": "HP259833",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275922.1244597
+  },
+  "USB_VID_1B3F_PID_2008_REV_0100": {
+    "data": {
+      "name": "Dispositivo USB composito",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=USB%5CVID_1B3F%26PID_2008%26REV_0100",
+      "source": "unknown"
+    },
+    "_ts": 1783275922.3482518
+  },
+  "ACPI_GenuineIntel_-_Intel64_Family_6_Model_158": {
+    "data": {
+      "name": "Intel Core i7-9700F CPU @ 3.00GHz",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275922.550443
+  },
+  "SWC_06657A6D-FE0F-4C90-8DDA-A1501C74CE4B": {
+    "data": {
+      "name": "Intel Management Engine WMI Provider",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275922.7633371
+  },
+  "ROOT_mssmbios": {
+    "data": {
+      "name": "Driver BIOS Microsoft System Management",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275922.9663458
+  },
+  "ACPI_VEN_INT_DEV_340E": {
+    "data": {
+      "name": "Risorse scheda madre",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275923.17036
+  },
+  "HID_VID_0000_PID_3825_REV_0100": {
+    "data": {
+      "name": "Mouse compatibile HID",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275923.4137912
+  },
+  "HID_VID_04D9_PID_1702_REV_0101_MI_01_Col01": {
+    "data": {
+      "name": "Controller di sistema compatibile HID",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275923.6450167
+  },
+  "ROOT_SWENUM": {
+    "data": {
+      "name": "Enumeratore di dispositivi software Plug and Play",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275923.8548899
+  },
+  "Root_vdvge": {
+    "data": {
+      "name": "Virtual Desktop Gamepad Emulation Bus",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275924.056441
+  },
+  "Root_Oculus_ViGEmBus": {
+    "data": {
+      "name": "Oculus Virtual Gamepad Emulation Bus",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275924.2640872
+  },
+  "ACPI_VEN_PNP_DEV_0B00": {
+    "data": {
+      "name": "Orologio di sistema CMOS a tempo reale",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275924.5157406
+  },
+  "ROOT_RDPBUS": {
+    "data": {
+      "name": "Bus Redirector dispositivi Desktop remoto",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275924.7187617
+  },
+  "PCI_VEN_10DE_DEV_1ADA_SUBSYS_C7571462_REV_A1": {
+    "data": {
+      "name": "TU106 USB 3.1 Host Controller",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=PCI%5CVEN_10DE%26DEV_1ADA%26SUBSYS_C7571462%26REV_A1",
+      "source": "devicehunt"
+    },
+    "_ts": 1783275926.154919
+  },
+  "ms_ndiswanipv6": {
+    "data": {
+      "name": "WAN Miniport",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275926.3612185
+  },
+  "*VDVAD": {
+    "data": {
+      "name": "Virtual Desktop Audio",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275926.5721354
+  },
+  "Root_oculusvad_OculusVad": {
+    "data": {
+      "name": "Oculus Virtual Audio Device",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275926.7776873
+  },
+  "USB_VID_04D9_PID_1702_REV_0101_MI_01": {
+    "data": {
+      "name": "Dispositivo di input USB",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "https://www.catalog.update.microsoft.com/Search.aspx?q=USB%5CVID_04D9%26PID_1702%26REV_0101%26MI_01",
+      "source": "unknown"
+    },
+    "_ts": 1783275926.9803448
+  },
+  "ms_l2tpminiport": {
+    "data": {
+      "name": "WAN Miniport",
+      "latest_version": "",
+      "download_url": "",
+      "search_url": "",
+      "source": "unknown"
+    },
+    "_ts": 1783275927.217406
+  }
+}

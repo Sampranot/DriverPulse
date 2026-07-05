@@ -201,14 +201,51 @@ def compare_with_database(devices: List[DeviceInfo]) -> List[DeviceInfo]:
     return devices
 
 
-def fetch_online_updates() -> bool:
+def online_fallback(devices: List[DeviceInfo]) -> List[DeviceInfo]:
     """
-    Aggiorna il database driver da fonti online.
-    Questo metodo verra' chiamato periodicamente dalla telemetria.
+    Cerca online informazioni per dispositivi UNKNOWN.
+    Non bloccante: usa timeout breve. Se fallisce, il device resta UNKNOWN.
+    Migliora il nome del dispositivo e aggiunge URL di ricerca.
     """
-    # TODO: implementare scraping da fonti ufficiali
-    # Per ora, restituisce True per segnalare che il meccanismo e' pronto
-    return True
+    try:
+        from .online_search import search_online
+    except ImportError:
+        return devices
+    
+    for dev in devices:
+        if dev.status != 'UNKNOWN':
+            continue
+        
+        hw_id = dev.hardware_id or dev.pnp_id
+        if not hw_id:
+            continue
+        
+        # Ricerca non bloccante (timeout breve)
+        try:
+            info = search_online(hw_id, dev.device_name)
+            if info.get('name') and info['name'] != dev.device_name:
+                dev.device_name = info['name'][:100]  # Arricchisci nome
+            if info.get('search_url'):
+                dev.suggested_url = info['search_url']
+        except Exception:
+            pass
+    
+    return devices
+
+
+def scan_drivers(enable_online_fallback: bool = True) -> List[DeviceInfo]:
+    """Esegue scansione completa: detect + DB match + online fallback."""
+    detector = get_detector()
+    devices = detector.get_all_devices(force_refresh=True)
+    results = compare_with_database(devices)
+    
+    if enable_online_fallback:
+        try:
+            results = online_fallback(results)
+        except Exception:
+            pass
+    
+    return results
 
 
 def scan_drivers() -> List[DeviceInfo]:
