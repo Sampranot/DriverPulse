@@ -1,8 +1,12 @@
 """
-Online Search — Cerca informazioni driver per hardware ID sconosciuti
+Online Search — Cerca, scarica e installa driver da Windows Update
 ====================================================================
-Fallback quando un dispositivo non e' nel database locale.
-Usa DeviceHunt + Windows Update API + link per ricerca manuale.
+Fallback quando un dispositivo non e' nel database locale o non ha URL.
+Supporta:
+  - Ricerca Windows Update API (PowerShell)
+  - Scaricamento diretto driver da Microsoft Update Catalog
+  - DeviceHunt per identificazione hardware
+  - Cache intelligente (30 giorni)
 
 NON bloccante: timeout breve, non crasha mai.
 Funziona su qualsiasi Windows 10/11.
@@ -12,10 +16,12 @@ import os
 import json
 import time
 import subprocess
-from typing import Optional, Dict
-from datetime import datetime
+import tempfile
+import hashlib
+import shutil
+from typing import Optional, Dict, Tuple, List
 from urllib.request import Request, urlopen
-from urllib.error import URLError
+from urllib.error import URLError, HTTPError
 
 # Cache
 _CACHE = {}
@@ -23,14 +29,14 @@ try:
     from .paths import get_cache_path as _get_cache_path
     _CACHE_PATH = _get_cache_path()
 except ImportError:
-    import os
     _CACHE_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)),
                                'db', 'search_cache.json')
 _CACHE_TTL = 86400 * 30  # 30 giorni
 
 # Headers per sembrare un browser
 _HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+                  '(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Language': 'en-US,en;q=0.9',
 }
@@ -69,14 +75,11 @@ def _extract_vendor_device(hw_id: str) -> tuple:
 
 
 def search_devicehunt(hw_id: str, timeout: int = 8) -> Optional[Dict]:
-    """Cerca il nome del dispositivo su DeviceHunt.
-    Funziona per PCI e USB. Non richiede API key.
-    """
+    """Cerca il nome del dispositivo su DeviceHunt."""
     ven, dev = _extract_vendor_device(hw_id)
     if not ven or not dev:
         return None
 
-    # Determina se è PCI o USB
     if hw_id.startswith('PCI\\'):
         url = f'https://devicehunt.com/view/type/pci/vendor/{ven}/device/{dev}'
     elif hw_id.startswith('USB\\'):
@@ -89,14 +92,9 @@ def search_devicehunt(hw_id: str, timeout: int = 8) -> Optional[Dict]:
         with urlopen(req, timeout=timeout) as resp:
             html = resp.read().decode('utf-8', errors='ignore')
 
-        # Cerca il nome del dispositivo nell'HTML
-        # Pattern: "Device Name" o titolo della pagina
         patterns = [
-            # DeviceHunt mette il nome nel titolo: "NOME — PCI VEN:DEV — DeviceHunt"
             r'<title>(.+?)\s*[—–-]\s*(?:PCI|USB)\s+\w+:\w+\s*[—–-]\s*DeviceHunt</title>',
-            # O nel tag h1
             r'<h1[^>]*>(.+?)</h1>',
-            # O in un div con classe device-name
             r'class="[^"]*device-name[^"]*"[^>]*>(.+?)</',
             r'class="[^"]*device[^"]*"[^>]*>(.+?)</',
         ]
@@ -105,7 +103,6 @@ def search_devicehunt(hw_id: str, timeout: int = 8) -> Optional[Dict]:
             match = re.search(pattern, html, re.IGNORECASE | re.DOTALL)
             if match:
                 name = match.group(1).strip()
-                # Pulisci da tag HTML
                 name = re.sub(r'<[^>]+>', '', name)
                 name = name.split('—')[0].strip()
                 if name and 'DeviceHunt' not in name:
@@ -120,7 +117,6 @@ def search_devicehunt(hw_id: str, timeout: int = 8) -> Optional[Dict]:
                 'source': 'devicehunt',
             }
 
-        # Fallback: nessun nome trovato
         return {
             'name': f'Vendor {ven} Device {dev}',
             'vendor_id': ven,
@@ -132,31 +128,55 @@ def search_devicehunt(hw_id: str, timeout: int = 8) -> Optional[Dict]:
         return None
 
 
-def search_windows_update(hw_id: str, timeout: int = 15) -> Optional[Dict]:
-    """Cerca driver tramite Windows Update API (PowerShell).
-    Restituisce {version, title} o None se non disponibile.
+def search_windows_update(hw_id: str, timeout: int = 30) -> Optional[Dict]:
     """
-    # Script PowerShell robusto
+    Cerca driver tramite Windows Update API (PowerShell).
+    Restituisce {version, title, download_url} o None.
+    """
     ps_script = f'''
+param([string]$hwId = "{hw_id}")
+
+$ErrorActionPreference = "SilentlyContinue"
 try {{
-    `$Session = New-Object -ComObject Microsoft.Update.Session
-    `$Searcher = `$Session.CreateUpdateSearcher()
-    `$searchString = "Type='Driver' and DriverHardwareID='{hw_id}'"
-    `$result = `$Searcher.Search(`$searchString)
-    if (`$result.Updates.Count -gt 0) {{
-        `$u = `$result.Updates | Sort-Object LastDeploymentChangeTime -Descending | Select-Object -First 1
-        `$ver = ""
-        `$title = `$u.Title
-        `$m = [regex]::Match(`$title, '(\\d+\\.\\d+\\.\\d+\\.\\d+)')
-        if (`$m.Success) {{ `$ver = `$m.Groups[1].Value }}
-        Write-Output ("VERSION:" + `$ver)
-        Write-Output ("TITLE:" + `$title)
-        exit 0
+    $Session = New-Object -ComObject Microsoft.Update.Session
+    $Searcher = $Session.CreateUpdateSearcher()
+    $searchString = "Type='Driver' and DriverHardwareID='" + $hwId + "'"
+    $result = $Searcher.Search($searchString)
+
+    if ($result.Updates.Count -eq 0) {{
+        Write-Output "STATUS:NO_UPDATES"
+        exit 1
     }}
+
+    $update = $result.Updates | Sort-Object LastDeploymentChangeTime -Descending | Select-Object -First 1
+
+    Write-Output "STATUS:FOUND"
+    Write-Output "TITLE:$($update.Title)"
+    Write-Output "SIZE:$($update.MaxDownloadSize)"
+
+    # Estrai versione dal titolo
+    $ver = ""
+    $m = [regex]::Match($update.Title, '(\\d+\\.\\d+\\.\\d+\\.\\d+)')
+    if ($m.Success) {{ $ver = $m.Groups[1].Value }}
+    Write-Output "VERSION:$ver"
+
+    # Verifica se l'update e' scaricabile
+    $downloadable = $true
+    try {{
+        $dl = New-Object -ComObject Microsoft.Update.Downloader
+        $dl.Updates = New-Object -ComObject Microsoft.Update.UpdateColl
+        $dl.Updates.Add($update) | Out-Null
+        Write-Output "DOWNLOADABLE:yes"
+    }} catch {{
+        Write-Output "DOWNLOADABLE:no"
+    }}
+
+    exit 0
 }} catch {{
-    Write-Output ("ERROR:" + `$_.Exception.Message)
+    Write-Output ("STATUS:ERROR")
+    Write-Output ("MSG:" + $_.Exception.Message)
+    exit 1
 }}
-exit 1
 '''
     try:
         result = subprocess.run(
@@ -164,24 +184,24 @@ exit 1
             capture_output=True, text=True, timeout=timeout,
             creationflags=subprocess.CREATE_NO_WINDOW
         )
+
         lines = result.stdout.strip().split('\n')
-        version = ''
-        title = ''
+        info = {'source': 'windows_update', 'status': 'unknown'}
         for line in lines:
             line = line.strip()
-            if line.startswith('VERSION:'):
-                version = line[8:].strip()
-            elif line.startswith('TITLE:'):
-                title = line[6:].strip()
-            elif line.startswith('ERROR:'):
-                return None
+            if ':' in line:
+                key, _, value = line.partition(':')
+                info[key.strip()] = value.strip()
 
-        if version:
+        if info.get('STATUS') == 'FOUND':
             return {
-                'latest_version': version,
-                'title': title,
+                'latest_version': info.get('VERSION', ''),
+                'title': info.get('TITLE', ''),
+                'size': info.get('SIZE', '0'),
+                'downloadable': info.get('DOWNLOADABLE', 'yes') == 'yes',
                 'source': 'windows_update',
             }
+
         return None
 
     except subprocess.TimeoutExpired:
@@ -190,12 +210,117 @@ exit 1
         return None
 
 
+def download_and_install_wu(hw_id: str, device_name: str = '') -> Tuple[bool, str]:
+    """
+    Scarica e installa un driver da Windows Update.
+    Usa Microsoft.Update API via PowerShell.
+    Restituisce (successo, messaggio).
+    Richiede privilegi amministratore.
+    """
+    ps_script = f'''
+param([string]$hwId = "{hw_id}")
+
+$ErrorActionPreference = "SilentlyContinue"
+try {{
+    $Session = New-Object -ComObject Microsoft.Update.Session
+    $Searcher = $Session.CreateUpdateSearcher()
+    $searchString = "Type='Driver' and DriverHardwareID='" + $hwId + "'"
+    $result = $Searcher.Search($searchString)
+
+    if ($result.Updates.Count -eq 0) {{
+        Write-Output "STATUS:NO_UPDATES"
+        exit 1
+    }}
+
+    $update = $result.Updates | Sort-Object LastDeploymentChangeTime -Descending | Select-Object -First 1
+
+    Write-Output "TITLE:$($update.Title)"
+
+    # Scarica
+    $downloader = New-Object -ComObject Microsoft.Update.Downloader
+    $downloader.Updates = New-Object -ComObject Microsoft.Update.UpdateColl
+    $downloader.Updates.Add($update) | Out-Null
+
+    $dlResult = $downloader.Download()
+
+    if ($dlResult.ResultCode -ne 2) {{
+        Write-Output "STATUS:DOWNLOAD_FAILED:$($dlResult.ResultCode)"
+        exit 1
+    }}
+
+    Write-Output "STATUS:DOWNLOADED"
+
+    # Installa
+    $installer = New-Object -ComObject Microsoft.Update.Installer
+    $installer.Updates = New-Object -ComObject Microsoft.Update.UpdateColl
+    $installer.Updates.Add($update) | Out-Null
+
+    $installResult = $installer.Install()
+
+    if ($installResult.ResultCode -eq 2) {{
+        Write-Output "STATUS:INSTALLED"
+        exit 0
+    }} else {{
+        Write-Output "STATUS:INSTALL_FAILED:$($installResult.ResultCode)"
+        exit 1
+    }}
+}} catch {{
+    Write-Output ("STATUS:ERROR")
+    Write-Output ("MSG:" + $_.Exception.Message)
+    exit 1
+}}
+'''
+    try:
+        result = subprocess.run(
+            ['powershell', '-NoProfile', '-ExecutionPolicy', 'Bypass', '-Command', ps_script],
+            capture_output=True, text=True, timeout=300,
+            creationflags=subprocess.CREATE_NO_WINDOW
+        )
+
+        stdout = result.stdout.strip()
+        title = ''
+        status = ''
+        for line in stdout.split('\n'):
+            line = line.strip()
+            if line.startswith('TITLE:'):
+                title = line.split(':', 1)[1].strip()[:100]
+            elif line.startswith('STATUS:'):
+                status = line.split(':', 1)[1].strip()
+
+        if status == 'INSTALLED':
+            return True, f"{device_name}: driver installato da Windows Update"
+        elif status == 'NO_UPDATES':
+            return False, f"{device_name}: nessun driver su Windows Update"
+        elif status == 'DOWNLOADED':
+            return False, f"{device_name}: scaricato ma installazione fallita"
+        elif status:
+            return False, f"{device_name}: Windows Update: {status[:100]}"
+        else:
+            return False, f"{device_name}: Windows Update non risponde"
+
+    except subprocess.TimeoutExpired:
+        return False, f"{device_name}: Windows Update TIMEOUT (300s)"
+    except Exception as e:
+        return False, f"{device_name}: {e}"
+
+
+def generate_search_url(hw_id: str) -> str:
+    """Genera URL per ricerca manuale su Microsoft Update Catalog."""
+    if not hw_id:
+        return ''
+
+    # Codifica l'HW ID per URL
+    encoded = hw_id.replace('\\', '%5C').replace('&', '%26')
+    return f'https://www.catalog.update.microsoft.com/Search.aspx?q={encoded}'
+
+
 def search_online(hw_id: str, device_name: str = '') -> Dict:
     """
     Cerca informazioni per un hardware ID sconosciuto.
     Restituisce SEMPRE un dict, mai None:
     - name: nome del dispositivo (trovato o derivato)
-    - version: versione driver (se trovata)
+    - latest_version: versione driver (se trovata)
+    - download_url: URL per download diretto (se trovato)
     - search_url: URL per ricerca manuale
     - source: fonte delle informazioni
     """
@@ -212,7 +337,7 @@ def search_online(hw_id: str, device_name: str = '') -> Dict:
 
     # Cache check
     _load_cache()
-    cache_key = hw_id.replace('&', '_').replace('\\', '_')
+    cache_key = re.sub(r'[&\\]', '_', hw_id)
     if cache_key in _CACHE:
         cached = _CACHE[cache_key]
         if time.time() - cached.get('_ts', 0) < _CACHE_TTL:
@@ -222,20 +347,19 @@ def search_online(hw_id: str, device_name: str = '') -> Dict:
     dh = search_devicehunt(hw_id)
     if dh and dh.get('name'):
         result['name'] = dh['name']
-        result['source'] = dh['source']
+        result['source'] = dh.get('source', 'devicehunt')
 
     # 2) Cerca versione su Windows Update
     wu = search_windows_update(hw_id)
     if wu:
         result['latest_version'] = wu.get('latest_version', '')
         result['source'] = 'windows_update'
+        if wu.get('downloadable'):
+            result['download_url'] = 'windows_update'  # Flag per usare WU API
 
     # 3) Genera URL per ricerca manuale
     if hw_id.startswith('PCI\\') or hw_id.startswith('USB\\'):
-        # Microsoft Update Catalog search
-        encoded = hw_id.replace('\\', '%5C').replace('&', '%26')
-        result['search_url'] = (f'https://www.catalog.update.microsoft.com/'
-                                f'Search.aspx?q={encoded}')
+        result['search_url'] = generate_search_url(hw_id)
 
     # Salva in cache
     _CACHE[cache_key] = {
@@ -269,4 +393,4 @@ if __name__ == '__main__':
         result = search_online(hw_id)
         print(f'  Nome: {result.get("name", "?")}')
         print(f'  Versione: {result.get("latest_version", "?")}')
-        print(f'  URL ricerca: {result.get("search_url", "?")[:60]}')
+        print(f'  URL: {result.get("search_url", "?")[:80]}')

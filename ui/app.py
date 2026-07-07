@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from core.scanner import scan_drivers, get_update_summary
 from core.detector import get_detector, DeviceInfo
 
-# Anonymous hardware telemetry
-from telemetry.hardware_telemetry import get_telemetry
+# Vendor catalog sync (background driver database update)
+from core.manufacturer_lookup import get_catalog_sync
 
 
 class DriverPulseApp:
@@ -33,8 +33,8 @@ class DriverPulseApp:
         self._scanning = False
         self._updating = False
         
-        # Avvia telemetria in background
-        self._telemetry = get_telemetry(auto_start=True)
+        # Avvia sincronizzazione catalogo driver in background
+        self._catalog_sync = get_catalog_sync(auto_start=True)
         
         if not silent:
             self._build_ui()
@@ -200,10 +200,10 @@ class DriverPulseApp:
         text.insert(tk.END, "  - Download e installazione automatica\n")
         text.insert(tk.END, "  - Aggiornamento database in tempo reale\n")
         text.insert(tk.END, "  - Funziona in background (system tray)\n\n")
-        text.insert(tk.END, "Telemetria:\n")
-        text.insert(tk.END, "  Invia statistiche hardware anonime per migliorare\n")
-        text.insert(tk.END, "  il database dei driver. Nessun dato personale.\n")
-        text.insert(tk.END, "  Disattivabile nelle impostazioni.\n\n")
+        text.insert(tk.END, "Catalogo driver:\n")
+        text.insert(tk.END, "  Sincronizzazione periodica con i database\n")
+        text.insert(tk.END, "  dei produttori per avere sempre i driver\n")
+        text.insert(tk.END, "  piu' recenti. Connessione solo quando necessario.\n\n")
         text.insert(tk.END, "https://github.com/driverpulse/driverpulse\n")
         
         text.config(state=tk.DISABLED)
@@ -350,14 +350,14 @@ class DriverPulseApp:
     
     def _update_status(self):
         """Aggiornamento periodico della status bar."""
-        if self._telemetry:
-            t_status = self._telemetry.status()
+        if self._catalog_sync:
+            c_status = self._catalog_sync.status()
             self.root.after(5000, self._update_status)
     
     def _on_close(self):
         """Chiusura applicazione."""
-        if self._telemetry:
-            self._telemetry.stop()
+        if self._catalog_sync:
+            self._catalog_sync.stop()
         self.root.destroy()
 
 

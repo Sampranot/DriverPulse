@@ -10,6 +10,8 @@ Utilizza Windows Management Instrumentation per:
 import wmi
 import sys
 import re
+import json
+import subprocess
 from typing import List, Dict, Any, Optional
 from dataclasses import dataclass, field, asdict
 from datetime import datetime
@@ -31,27 +33,34 @@ class DeviceInfo:
     status: str = "unknown"  # current, outdated, missing, unknown
     suggested_version: str = ""
     suggested_url: str = ""
+    search_url: str = ""  # URL per ricerca manuale (es. MS Update Catalog)
     pnp_id: str = ""
 
 
 class HardwareDetector:
-    """Rileva hardware e driver tramite WMI."""
+    """Rileva hardware e driver tramite WMI + fallback PowerShell."""
 
     def __init__(self):
         self._cached_devices: Optional[List[DeviceInfo]] = None
+        self._conn = None
         try:
             self._conn = wmi.WMI()
         except Exception as e:
-            print(f"[WARNING] WMI initialization: {e}")
-            self._conn = None
+            print(f"[WARNING] WMI COM non disponibile: {e}")
+            print("[INFO]  Uso fallback PowerShell...")
 
     def get_all_devices(self, force_refresh: bool = False) -> List[DeviceInfo]:
-        """Recupera tutti i dispositivi hardware con i loro driver."""
+        """Recupera tutti i dispositivi hardware con i loro driver.
+        Usa WMI COM se disponibile, altrimenti fallback PowerShell."""
         if self._cached_devices and not force_refresh:
             return self._cached_devices
 
         devices = []
+
+        # Fallback PowerShell se WMI COM non disponibile
         if not self._conn:
+            devices = self._scan_with_powershell()
+            self._cached_devices = devices
             return devices
 
         try:
@@ -94,9 +103,232 @@ class HardwareDetector:
 
         except Exception as e:
             print(f"[ERROR] WMI query: {e}")
+            print("[INFO]  Fallback a PowerShell...")
+            devices = self._scan_with_powershell()
 
         self._cached_devices = devices
         return devices
+
+    def _scan_with_powershell(self) -> List[DeviceInfo]:
+        """Fallback: enumera dispositivi via PowerShell con DriverVersion reale.
+        Usa Get-PnpDeviceProperty per DriverVersion (funziona sempre su Win10/11).
+        Gestisce correttamente null, errori, e qualsiasi versione di Windows."""
+        ps_script = r'''
+$devices = @()
+try {
+    # Pre-carica tutti i dispositivi CIM (veloce)
+    $allWmi = Get-CimInstance -ClassName Win32_PnPEntity -ErrorAction SilentlyContinue
+    foreach ($d in $allWmi) {
+        # Nome dispositivo (safe)
+        $name = ""
+        try { $name = [string]$d.Name } catch {}
+        if ([string]::IsNullOrWhiteSpace($name)) { continue }
+        
+        # HardwareID (safe)
+        $hwId = ""
+        if ($d.HardwareID) {
+            try { 
+                $first = @($d.HardwareID)[0]
+                if ($first) { $hwId = [string]$first }
+            } catch {}
+        }
+        
+        # Manufacturer (safe)
+        $manu = ""
+        try { $manu = [string]$d.Manufacturer } catch {}
+        
+        # DRIVER VERSION - via PnpDeviceProperty (funziona sempre)
+        $ver = ""
+        try {
+            $p = Get-PnpDeviceProperty -InstanceId $d.PNPDeviceID -KeyName "DEVPKEY_Device_DriverVersion" -ErrorAction SilentlyContinue
+            if ($null -ne $p -and $null -ne $p.Data) {
+                $ver = [string]$p.Data
+            }
+        } catch {}
+        
+        # Driver Date (safe)
+        $date = ""
+        try { $date = [string]$d.DriverDate } catch {}
+        
+        $dev = [PSCustomObject]@{
+            DeviceID   = [string]$d.DeviceID
+            Name       = $name
+            HardwareID = $hwId
+            Manufacturer = $manu
+            DriverVersion = $ver
+            DriverDate = $date
+        }
+        $devices += $dev
+    }
+} catch {
+    Write-Output ("PS_ERROR:" + $_.Exception.Message)
+}
+$devices | ConvertTo-Json -Compress -Depth 2
+'''
+        try:
+            result = subprocess.run(
+                ['powershell', '-NoProfile', '-ExecutionPolicy', 'Bypass', '-Command', ps_script],
+                capture_output=True, text=True, timeout=120,
+                creationflags=subprocess.CREATE_NO_WINDOW
+            )
+
+            raw = result.stdout.strip()
+            print(f"[DEBUG] PS returncode={result.returncode} stdout={len(raw)}B stderr={len(result.stderr)}B")
+
+            if not raw:
+                print(f"[DEBUG] PS stdout vuoto. stderr: {result.stderr[:200]}")
+                return self._scan_with_wmic()
+
+            if raw.startswith('PS_ERROR'):
+                print(f"[DEBUG] PS ERROR: {raw[:200]}")
+                return self._scan_with_wmic()
+
+            # Estrai JSON dall'output
+            json_start = raw.find('[{')
+            if json_start < 0:
+                print(f"[DEBUG] Nessun JSON trovato. Output: {raw[:200]}")
+                return self._scan_with_wmic()
+
+            raw_json = raw[json_start:]
+            json_end = raw_json.rfind('}]')
+            if json_end < 0:
+                print(f"[DEBUG] JSON non terminato: {raw_json[:200]}")
+                return self._scan_with_wmic()
+            raw_json = raw_json[:json_end+2]
+
+            ps_devices = json.loads(raw_json)
+            print(f"[DEBUG] PS trovati {len(ps_devices)} dispositivi (grezzi)")
+
+            devices = []
+            for d in ps_devices:
+                name = d.get('Name', '') or ''
+                if not name.strip() or name == 'Unknown':
+                    continue
+                name = self._clean_name(name)
+                hw_id = d.get('HardwareID', '') or ''
+                version = self._fmt_version(d.get('DriverVersion', '') or '')
+                dev = DeviceInfo(
+                    device_id=d.get('DeviceID', '') or '',
+                    device_name=name,
+                    hardware_id=hw_id,
+                    manufacturer=d.get('Manufacturer', '') or '',
+                    driver_version=version,
+                    driver_date=d.get('DriverDate', '') or '',
+                    category=self._categorize_from_class('', name),
+                    pnp_id=d.get('DeviceID', '') or '',
+                )
+                devices.append(dev)
+
+            con_versione = sum(1 for d in devices if d.driver_version)
+            print(f"[DEBUG] PS finali: {len(devices)} dispositivi, {con_versione} con DriverVersion")
+            return devices
+
+        except Exception as e:
+            print(f"[WARN] PowerShell scan: {e}")
+            return self._scan_with_wmic()
+
+    def _scan_with_wmic(self) -> List[DeviceInfo]:
+        """Ultimo fallback: usa wmic.exe (obsoleto ma presente su tutti i Windows)."""
+        ps_script = r'''
+$devices = @()
+try {
+    $wmi = Get-CimInstance -ClassName Win32_PnPEntity -ErrorAction SilentlyContinue | Where-Object { $_.ConfigManagerErrorCode -eq 0 }
+    foreach ($d in $wmi) {
+        $hwId = ""
+        if ($d.HardwareID) { $hwId = [string]($d.HardwareID[0]) }
+        $dev = [PSCustomObject]@{
+            DeviceID   = $d.DeviceID
+            Name       = $d.Name
+            HardwareID = $hwId
+            Class      = "Unknown"
+            Manufacturer = $d.Manufacturer
+            DriverVersion = $d.DriverVersion
+            DriverProvider = ""
+            DriverDate = $d.DriverDate
+        }
+        $devices += $dev
+    }
+} catch {}
+$devices | ConvertTo-Json -Compress -Depth 2
+'''
+        try:
+            result = subprocess.run(
+                ['powershell', '-NoProfile', '-ExecutionPolicy', 'Bypass', '-Command', ps_script],
+                capture_output=True, text=True, timeout=60,
+                creationflags=subprocess.CREATE_NO_WINDOW
+            )
+
+            if not result.stdout.strip():
+                return []
+
+            import json
+            raw = result.stdout.strip()
+            json_start = raw.find('[{')
+            if json_start >= 0:
+                raw = raw[json_start:]
+            json_end = raw.rfind('}]')
+            if json_end >= 0:
+                raw = raw[:json_end+2]
+
+            ps_devices = json.loads(raw)
+            devices = []
+            for d in ps_devices:
+                if not d.get('Name') or d.get('Name') == 'Unknown':
+                    continue
+                name = d.get('Name', 'Unknown Device') or 'Unknown Device'
+                name = self._clean_name(name)
+                dev = DeviceInfo(
+                    device_id=d.get('DeviceID', '') or '',
+                    device_name=name,
+                    hardware_id=d.get('HardwareID', '') or '',
+                    manufacturer=d.get('Manufacturer', '') or '',
+                    driver_version=self._fmt_version(d.get('DriverVersion', '') or ''),
+                    driver_date=d.get('DriverDate', '') or '',
+                    pnp_id=d.get('DeviceID', '') or '',
+                )
+                devices.append(dev)
+            return devices
+
+        except Exception as e:
+            print(f"[WARN] WMIC scan fallito: {e}")
+            return []
+
+    def _fmt_version(self, v: str) -> str:
+        """Formatta versione driver."""
+        if not v:
+            return ''
+        # Già in formato stringa
+        return v.strip()
+
+    def _categorize_from_class(self, cls: str, name: str) -> str:
+        """Categorizza dispositivo da classe PnP e nome."""
+        cls_lower = cls.lower()
+        name_lower = name.lower()
+        if cls_lower in ('display', 'video'):
+            return 'display'
+        if cls_lower in ('net', 'network', 'netcard', 'wifi', 'bluetooth'):
+            return 'network'
+        if cls_lower in ('audio', 'media', 'sound'):
+            return 'audio'
+        if cls_lower in ('hdc', 'storage', 'diskdrive'):
+            return 'storage'
+        if cls_lower in ('usb', 'usbhub'):
+            return 'usb'
+        if cls_lower in ('keyboard', 'mouse', 'hid'):
+            return 'input'
+        if cls_lower in ('system', 'chipset', 'motherboard'):
+            return 'chipset'
+        if 'nvidia' in name_lower or 'radeon' in name_lower or 'graphics' in name_lower:
+            return 'display'
+        if 'audio' in name_lower or 'realtek' in name_lower:
+            return 'audio'
+        if 'ethernet' in name_lower or 'wifi' in name_lower or 'wireless' in name_lower or 'bluetooth' in name_lower:
+            return 'network'
+        if 'sata' in name_lower or 'ahci' in name_lower or 'nvme' in name_lower:
+            return 'storage'
+        if 'intel' in name_lower and 'chipset' in name_lower:
+            return 'chipset'
+        return 'unknown'
 
     def get_device_by_category(self, category: str) -> List[DeviceInfo]:
         """Filtra dispositivi per categoria."""

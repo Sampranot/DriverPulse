@@ -1,0 +1,410 @@
+{
+  "version": "1.1.0",
+  "updated": "2026-07-05T20:20:26.127056",
+  "source": "curated",
+  "total_entries": 54,
+  "drivers": {
+    "PCI\\VEN_10DE": {
+      "name": "NVIDIA GPU",
+      "manufacturer": "NVIDIA",
+      "latest_version": "965.55",
+      "download_url": "https://us.download.nvidia.com/Windows/560.94/560.94-desktop-win10-win11-64bit-international-dch-whql.exe",
+      "category": "display",
+      "checksum": "",
+      "notes": "Studio Driver - Dec 2025",
+      "_auto_updated": "2026-07-05T20:07:01.816121"
+    },
+    "PCI\\VEN_10DE&DEV_1E84": {
+      "name": "NVIDIA GeForce RTX 2080 Ti",
+      "manufacturer": "NVIDIA",
+      "latest_version": "965.55",
+      "download_url": "https://us.download.nvidia.com/Windows/560.94/560.94-desktop-win10-win11-64bit-international-dch-whql.exe",
+      "category": "display",
+      "_auto_updated": "2026-07-05T20:07:01.816127"
+    },
+    "PCI\\VEN_10DE&DEV_1F08": {
+      "name": "NVIDIA GeForce RTX 3080",
+      "manufacturer": "NVIDIA",
+      "latest_version": "965.55",
+      "download_url": "https://us.download.nvidia.com/Windows/560.94/560.94-desktop-win10-win11-64bit-international-dch-whql.exe",
+      "category": "display",
+      "_auto_updated": "2026-07-05T20:07:01.816129"
+    },
+    "PCI\\VEN_10DE&DEV_2684": {
+      "name": "NVIDIA GeForce RTX 4090",
+      "manufacturer": "NVIDIA",
+      "latest_version": "965.55",
+      "download_url": "https://us.download.nvidia.com/Windows/560.94/560.94-desktop-win10-win11-64bit-international-dch-whql.exe",
+      "category": "display",
+      "_auto_updated": "2026-07-05T20:07:01.816131"
+    },
+    "PCI\\VEN_1002": {
+      "name": "AMD GPU",
+      "manufacturer": "AMD",
+      "latest_version": "26.6.4",
+      "download_url": "https://drivers.amd.com/drivers/whql-amd-software-adrenalin-25.5.1-win10-win11-may2026.exe",
+      "category": "display",
+      "_auto_updated": "2026-07-05T15:56:38.500690"
+    },
+    "PCI\\VEN_1002&DEV_73DF": {
+      "name": "AMD Radeon RX 7900 XTX",
+      "manufacturer": "AMD",
+      "latest_version": "26.6.4",
+      "download_url": "https://drivers.amd.com/drivers/whql-amd-software-adrenalin-25.5.1-win10-win11-may2026.exe",
+      "category": "display",
+      "_auto_updated": "2026-07-05T15:56:38.500696"
+    },
+    "PCI\\VEN_1002&DEV_73BF": {
+      "name": "AMD Radeon RX 7800 XT",
+      "manufacturer": "AMD",
+      "latest_version": "26.6.4",
+      "download_url": "https://drivers.amd.com/drivers/whql-amd-software-adrenalin-25.5.1-win10-win11-may2026.exe",
+      "category": "display",
+      "_auto_updated": "2026-07-05T15:56:38.500698"
+    },
+    "PCI\\VEN_8086": {
+      "name": "Intel Graphics",
+      "manufacturer": "Intel",
+      "latest_version": "101.8860",
+      "download_url": "https://www.techpowerup.com/download/intel-graphics-drivers/",
+      "category": "display",
+      "_auto_updated": "2026-07-05T20:20:26.127015"
+    },
+    "PCI\\VEN_8086&DEV_9A49": {
+      "name": "Intel Iris Xe Graphics",
+      "manufacturer": "Intel",
+      "latest_version": "101.8860",
+      "download_url": "https://www.techpowerup.com/download/intel-graphics-drivers/",
+      "category": "display",
+      "_auto_updated": "2026-07-05T20:20:26.127032"
+    },
+    "PCI\\VEN_8086&DEV_A780": {
+      "name": "Intel Arc A770 Graphics",
+      "manufacturer": "Intel",
+      "latest_version": "101.8860",
+      "download_url": "https://www.techpowerup.com/download/intel-graphics-drivers/",
+      "category": "display",
+      "_auto_updated": "2026-07-05T20:20:26.127044"
+    },
+    "PCI\\VEN_10EC": {
+      "name": "Realtek PCIe Ethernet",
+      "manufacturer": "Realtek",
+      "latest_version": "10.72.1105.2024",
+      "download_url": "https://www.realtek.com/en/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software",
+      "category": "network"
+    },
+    "PCI\\VEN_10EC&DEV_8168": {
+      "name": "Realtek RTL8168/8111 PCIe Gigabit Ethernet",
+      "manufacturer": "Realtek",
+      "latest_version": "10.72.1105.2024",
+      "download_url": "https://www.realtek.com/en/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software",
+      "category": "network"
+    },
+    "PCI\\VEN_10EC&DEV_8125": {
+      "name": "Realtek 2.5G Ethernet",
+      "manufacturer": "Realtek",
+      "latest_version": "10.72.1105.2024",
+      "download_url": "https://www.realtek.com/en/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software",
+      "category": "network"
+    },
+    "PCI\\VEN_8086&DEV_15F3": {
+      "name": "Intel Ethernet I225-V 2.5G",
+      "manufacturer": "Intel",
+      "latest_version": "29.0.0.0",
+      "download_url": "https://downloadmirror.intel.com/797523/PROWin64.zip",
+      "category": "network"
+    },
+    "PCI\\VEN_8086&DEV_15F2": {
+      "name": "Intel Ethernet I226-V 2.5G",
+      "manufacturer": "Intel",
+      "latest_version": "29.0.0.0",
+      "download_url": "https://downloadmirror.intel.com/797523/PROWin64.zip",
+      "category": "network"
+    },
+    "PCI\\VEN_8086&DEV_0953": {
+      "name": "Intel Wi-Fi 6 AX201",
+      "manufacturer": "Intel",
+      "latest_version": "23.90.1.5",
+      "download_url": "https://downloadmirror.intel.com/812466/WiFi-23.90.1-Driver64-Win10-Win11.zip",
+      "category": "network"
+    },
+    "PCI\\VEN_8086&DEV_0954": {
+      "name": "Intel Wi-Fi 6E AX211",
+      "manufacturer": "Intel",
+      "latest_version": "23.90.1.5",
+      "download_url": "https://downloadmirror.intel.com/812466/WiFi-23.90.1-Driver64-Win10-Win11.zip",
+      "category": "network"
+    },
+    "PCI\\VEN_8086&DEV_2725": {
+      "name": "Intel Wi-Fi 7 BE200",
+      "manufacturer": "Intel",
+      "latest_version": "23.90.1.5",
+      "download_url": "https://downloadmirror.intel.com/812466/WiFi-23.90.1-Driver64-Win10-Win11.zip",
+      "category": "network"
+    },
+    "PCI\\VEN_14C3": {
+      "name": "MediaTek Wi-Fi",
+      "manufacturer": "MediaTek",
+      "latest_version": "5.0.1.5800",
+      "download_url": "",
+      "category": "network"
+    },
+    "PCI\\VEN_14C3&DEV_0616": {
+      "name": "MediaTek MT7921 Wi-Fi 6",
+      "manufacturer": "MediaTek",
+      "latest_version": "5.0.1.5800",
+      "download_url": "",
+      "category": "network"
+    },
+    "PCI\\VEN_168C": {
+      "name": "Qualcomm Atheros WiFi",
+      "manufacturer": "Qualcomm",
+      "latest_version": "12.0.0.1140",
+      "download_url": "",
+      "category": "network"
+    },
+    "HDAUDIO\\FUNC_01&VEN_10EC": {
+      "name": "Realtek High Definition Audio",
+      "manufacturer": "Realtek",
+      "latest_version": "6.0.9743.1",
+      "download_url": "https://www.realtek.com/en/component/zoo/category/pc-audio-codecs-high-definition-audio-codecs-software",
+      "category": "audio"
+    },
+    "HDAUDIO\\FUNC_01&VEN_10EC&DEV_0900": {
+      "name": "Realtek ALC1220 Audio",
+      "manufacturer": "Realtek",
+      "latest_version": "6.0.9743.1",
+      "download_url": "https://www.realtek.com/en/component/zoo/category/pc-audio-codecs-high-definition-audio-codecs-software",
+      "category": "audio"
+    },
+    "HDAUDIO\\FUNC_01&VEN_10EC&DEV_0899": {
+      "name": "Realtek ALC897 Audio",
+      "manufacturer": "Realtek",
+      "latest_version": "6.0.9743.1",
+      "download_url": "https://www.realtek.com/en/component/zoo/category/pc-audio-codecs-high-definition-audio-codecs-software",
+      "category": "audio"
+    },
+    "HDAUDIO\\FUNC_01&VEN_10EC&DEV_0892": {
+      "name": "Realtek ALC892 Audio",
+      "manufacturer": "Realtek",
+      "latest_version": "6.0.9743.1",
+      "download_url": "https://www.realtek.com/en/component/zoo/category/pc-audio-codecs-high-definition-audio-codecs-software",
+      "category": "audio"
+    },
+    "HDAUDIO\\FUNC_01&VEN_8086": {
+      "name": "Intel Display Audio",
+      "manufacturer": "Intel",
+      "latest_version": "10.28.0.0",
+      "download_url": "",
+      "category": "audio"
+    },
+    "HDAUDIO\\FUNC_01&VEN_1002": {
+      "name": "AMD High Definition Audio",
+      "manufacturer": "AMD",
+      "latest_version": "10.0.1.29",
+      "download_url": "",
+      "category": "audio"
+    },
+    "PCI\\VEN_1022": {
+      "name": "AMD Chipset",
+      "manufacturer": "AMD",
+      "latest_version": "6.10.09.112",
+      "download_url": "https://drivers.amd.com/drivers/AMD_Chipset_6.10.09.112.exe",
+      "category": "chipset"
+    },
+    "PCI\\VEN_1022&DEV_14D8": {
+      "name": "AMD Ryzen Chipset (Promontory)",
+      "manufacturer": "AMD",
+      "latest_version": "6.10.09.112",
+      "download_url": "https://drivers.amd.com/drivers/AMD_Chipset_6.10.09.112.exe",
+      "category": "chipset"
+    },
+    "PCI\\VEN_8086&DEV_A0C8": {
+      "name": "Intel SMBus Driver",
+      "manufacturer": "Intel",
+      "latest_version": "10.1.5.2",
+      "download_url": "",
+      "category": "chipset"
+    },
+    "PCI\\VEN_8086&DEV_3A18": {
+      "name": "Intel Chipset (Series 4/5/6/7/8)",
+      "manufacturer": "Intel",
+      "latest_version": "10.1.19523.1",
+      "download_url": "",
+      "category": "chipset"
+    },
+    "PCI\\VEN_8086&DEV_A282": {
+      "name": "Intel SATA AHCI Controller",
+      "manufacturer": "Intel",
+      "latest_version": "19.0.0.1060",
+      "download_url": "",
+      "category": "storage"
+    },
+    "PCI\\VEN_1022&DEV_7901": {
+      "name": "AMD SATA Controller",
+      "manufacturer": "AMD",
+      "latest_version": "10.0.0.0",
+      "download_url": "",
+      "category": "storage"
+    },
+    "PCI\\VEN_144D": {
+      "name": "Samsung NVMe SSD",
+      "manufacturer": "Samsung",
+      "latest_version": "4.7.0.0",
+      "download_url": "https://www.samsung.com/semiconductor/minisite/ssd/download/tools/",
+      "category": "storage"
+    },
+    "PCI\\VEN_144D&DEV_A80A": {
+      "name": "Samsung 990 Pro NVMe",
+      "manufacturer": "Samsung",
+      "latest_version": "4.7.0.0",
+      "download_url": "https://www.samsung.com/semiconductor/minisite/ssd/download/tools/",
+      "category": "storage"
+    },
+    "PCI\\VEN_1344": {
+      "name": "Micron/Crucial NVMe",
+      "manufacturer": "Micron",
+      "latest_version": "8.1.0.0",
+      "download_url": "",
+      "category": "storage"
+    },
+    "PCI\\VEN_15B7": {
+      "name": "WD/SanDisk NVMe",
+      "manufacturer": "Western Digital",
+      "latest_version": "3.5.0.0",
+      "download_url": "",
+      "category": "storage"
+    },
+    "PCI\\VEN_1C5C": {
+      "name": "SK hynix NVMe",
+      "manufacturer": "SK hynix",
+      "latest_version": "3.4.0.0",
+      "download_url": "",
+      "category": "storage"
+    },
+    "USB\\VID_8087": {
+      "name": "Intel Bluetooth",
+      "manufacturer": "Intel",
+      "latest_version": "23.90.0.3",
+      "download_url": "",
+      "category": "bluetooth"
+    },
+    "USB\\VID_0CF3": {
+      "name": "Qualcomm Bluetooth",
+      "manufacturer": "Qualcomm",
+      "latest_version": "12.0.0.1150",
+      "download_url": "",
+      "category": "bluetooth"
+    },
+    "USB\\VID_0489": {
+      "name": "Foxconn Bluetooth",
+      "manufacturer": "Foxconn",
+      "latest_version": "10.0.22621.1",
+      "download_url": "",
+      "category": "bluetooth"
+    },
+    "USB\\VID_0A5C": {
+      "name": "Broadcom Bluetooth",
+      "manufacturer": "Broadcom",
+      "latest_version": "12.0.1.940",
+      "download_url": "",
+      "category": "bluetooth"
+    },
+    "USB\\VID_046D": {
+      "name": "Logitech USB Peripheral",
+      "manufacturer": "Logitech",
+      "latest_version": "8.60.0.0",
+      "download_url": "",
+      "category": "input"
+    },
+    "USB\\VID_1532": {
+      "name": "Razer USB Peripheral",
+      "manufacturer": "Razer",
+      "latest_version": "5.0.0.0",
+      "download_url": "",
+      "category": "input"
+    },
+    "USB\\VID_05AC": {
+      "name": "Apple USB Device",
+      "manufacturer": "Apple",
+      "latest_version": "10.0.0.0",
+      "download_url": "",
+      "category": "other"
+    },
+    "PCI\\VEN_10DE&DEV_1F06": {
+      "name": "NVIDIA GeForce RTX 2060 SUPER",
+      "manufacturer": "NVIDIA",
+      "latest_version": "965.55",
+      "download_url": "https://us.download.nvidia.com/Windows/560.94/560.94-desktop-win10-win11-64bit-international-dch-whql.exe",
+      "category": "display",
+      "_auto_updated": "2026-07-05T20:07:01.816128"
+    },
+    "PCI\\VEN_8086&DEV_A2CA": {
+      "name": "Intel 300 Series LPC Controller (Z370)",
+      "manufacturer": "Intel",
+      "latest_version": "10.1.11.4",
+      "download_url": "",
+      "category": "chipset"
+    },
+    "PCI\\VEN_8086&DEV_A2A3": {
+      "name": "Intel SMBus Controller (300 Series)",
+      "manufacturer": "Intel",
+      "latest_version": "10.1.11.4",
+      "download_url": "",
+      "category": "chipset"
+    },
+    "PCI\\VEN_8086&DEV_A2F0": {
+      "name": "Intel High Definition Audio Controller (300 Series)",
+      "manufacturer": "Intel",
+      "latest_version": "10.28.0.0",
+      "download_url": "",
+      "category": "audio"
+    },
+    "PCI\\VEN_8086&DEV_24FB": {
+      "name": "Intel Dual Band Wireless-AC 3168 Bluetooth",
+      "manufacturer": "Intel",
+      "latest_version": "23.90.1.5",
+      "download_url": "",
+      "category": "bluetooth"
+    },
+    "PCI\\VEN_8086&DEV_15B8": {
+      "name": "Intel Ethernet Connection I219-V/LM",
+      "manufacturer": "Intel",
+      "latest_version": "29.0.0.0",
+      "download_url": "",
+      "category": "network"
+    },
+    "USB\\VID_8087&PID_0AA7": {
+      "name": "Intel Wireless Bluetooth (3168/9560)",
+      "manufacturer": "Intel",
+      "latest_version": "23.90.0.3",
+      "download_url": "",
+      "category": "bluetooth"
+    },
+    "HDAUDIO\\FUNC_01&VEN_10DE&DEV_0093": {
+      "name": "NVIDIA High Definition Audio",
+      "manufacturer": "NVIDIA",
+      "latest_version": "1.4.5.6",
+      "download_url": "",
+      "category": "audio"
+    },
+    "HDAUDIO\\FUNC_01&VEN_10EC&DEV_0887": {
+      "name": "Realtek ALC887/888 High Definition Audio",
+      "manufacturer": "Realtek",
+      "latest_version": "6.0.9857.1",
+      "download_url": "https://www.realtek.com/en/component/zoo/category/pc-audio-codecs-high-definition-audio-codecs-software",
+      "category": "audio"
+    }
+  },
+  "categories": {
+    "display": "Schede video e grafica",
+    "network": "Rete e WiFi",
+    "audio": "Audio",
+    "chipset": "Chipset e motherboard",
+    "storage": "Storage e controller",
+    "bluetooth": "Bluetooth",
+    "input": "Input devices",
+    "other": "Altri dispositivi"
+  },
+  "last_auto_update": "2026-07-05T20:20:26.127063"
+}

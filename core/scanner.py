@@ -225,7 +225,7 @@ def online_fallback(devices: List[DeviceInfo]) -> List[DeviceInfo]:
             if info.get('name') and info['name'] != dev.device_name:
                 dev.device_name = info['name'][:100]  # Arricchisci nome
             if info.get('search_url'):
-                dev.suggested_url = info['search_url']
+                dev.search_url = info['search_url']
         except Exception:
             pass
     
