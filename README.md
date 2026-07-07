@@ -1,5 +1,9 @@
 # DriverPulse
 
+[![Download Latest](https://img.shields.io/github/v/release/Sampranot/DriverPulse?label=Download%20v1.0.0&logo=windows)](https://github.com/Sampranot/DriverPulse/releases/latest)
+[![GitHub Downloads](https://img.shields.io/github/downloads/Sampranot/DriverPulse/total?logo=github)](https://github.com/Sampranot/DriverPulse/releases)
+[![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-blue?logo=windows)]()
+
 > **Scarica e installa. Zero configurazione. Zero pubblicità. Zero tracker.**
 
 DriverPulse trova e aggiorna i driver obsoleti del tuo PC Windows. Silenzioso, gratuito, open source. Scarica il `.exe` e via.
@@ -11,8 +15,8 @@ Scarica da GitHub → Doppio click → 168 dispositivi scansionati in 3 secondi 
 ## Perché DriverPulse?
 
 | Driver Booster / Snappy / 3DP | DriverPulse |
-|---|---|
-| 20MB+ di bloat, pubblicità, toolbar | **7MB**, pulito, niente pubblicità |
+|---|---|---|
+| 20MB+ di bloat, pubblicità, toolbar | **16MB**, pulito, niente pubblicità |
 | Versione "free" limitata | **100% gratuito**, tutto sbloccato |
 | Telemetria verso server sconosciuti | Telemetria **locale e anonima** |
 | Chiudi gli occhi e spera | **Backup + rollback** prima di ogni modifica |
@@ -91,7 +95,7 @@ python main.py --scan
 
 - **Utile**. Risolve un problema reale senza creare problemi nuovi.
 - **Onesto**. Niente pubblicità, niente "edizione pro", niente tracker nascosti.
-- **Leggero**. Un eseguibile da 7MB che fa il suo lavoro e basta.
+- **Leggero**. Un eseguibile da 16MB che fa il suo lavoro e basta.
 
 ---
 
